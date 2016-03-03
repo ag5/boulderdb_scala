@@ -6,7 +6,7 @@ import spray.revolver.RevolverPlugin._
 object BuildSettings {
   val buildOrganization = "com.ssq"
   val buildVersion = "0.1"
-  val buildScalaVersion = "2.11.4"
+  val buildScalaVersion = "2.11.7"
 
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := buildOrganization,

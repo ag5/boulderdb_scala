@@ -8,15 +8,24 @@ import org.specs2.mutable.Specification
   */
 class DataStoreTest extends Specification {
   "A DataStore" should {
-    "save and restore an object" {
-      val user = TestObject (foo="bar")
+    "save and restore an object" in {
+      val user = TestObject(foo="bar")
       val datastore = new DataStore(backend=new InMemoryBackend(), headID="KaasDB")
       val hashKey = datastore.put(user)
 
-      val user = datastore.get(hashKey)
+      val returnedUser = datastore.get(hashKey)
+      returnedUser === user
     }
   }
 
 }
 
-case class TestObject(foo: String)
+
+case class TestObject(foo: String) extends Storable {
+
+  override def objectFormat(): ObjectFormat = TestObject.objectFormat
+}
+
+object TestObject {
+  val objectFormat = new ObjectFormat()
+}
